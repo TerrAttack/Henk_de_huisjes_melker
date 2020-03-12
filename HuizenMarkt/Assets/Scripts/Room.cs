@@ -8,6 +8,8 @@ public class Room : MonoBehaviour
     private RoomManager roomManager;
     private int id;
 
+    private bool isUnlocked = false;
+
     [SerializeField]
     public Color c;
     #endregion
@@ -20,6 +22,10 @@ public class Room : MonoBehaviour
     private void Update()
     {
         CheckForClick();
+        if(!Unlocked)
+        {
+            spriterRenderer.color = Color.gray;
+        }
     }
 
     private void CheckForClick()
@@ -59,5 +65,10 @@ public class Room : MonoBehaviour
     {
         get { return id; }
         set { id = value; }
+    }
+    public bool Unlocked
+    {
+        get { return isUnlocked; }
+        set { isUnlocked = value; }
     }
 }

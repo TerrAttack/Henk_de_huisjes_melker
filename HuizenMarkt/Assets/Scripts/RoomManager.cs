@@ -21,6 +21,12 @@ public class RoomManager : MonoBehaviour
             rooms[i].RoomManager = this;
         }
     }
+    
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            UnSelect();
+    }
     public void SetSelected(int id)
     {
         if(!roomIsSelected)
@@ -34,10 +40,20 @@ public class RoomManager : MonoBehaviour
             SelectRoom(id);
         }
     }
+
     private void SelectRoom(int id)
     {
+        if(!rooms[id].Unlocked)
+            rooms[id].Unlocked = true;
         rooms[id].SetColor();
         selectedRoom = rooms[id];
+    }
+
+    private void UnSelect()
+    {
+        roomIsSelected = false;
+        selectedRoom.SpriteRenderer.color = Color.white;
+        selectedRoom = null;
     }
 
     public Room[] Rooms
