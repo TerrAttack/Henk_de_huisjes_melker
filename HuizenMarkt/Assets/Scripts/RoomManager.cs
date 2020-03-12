@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
     private void UnSelect()
     {
         roomIsSelected = false;
-        selectedRoom.SpriteRenderer.color = Color.white;
+        if(selectedRoom != null) selectedRoom.SpriteRenderer.color = Color.white;
         selectedRoom = null;
     }
 
