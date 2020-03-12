@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: {fileID: 102900000, guid: ab7cc57b3716e6047871330c282def18, type: 3}
-  delay: 1
+  delay: 0
 --- !u!4 &1358631046
 Transform:
   m_ObjectHideFlags: 0
