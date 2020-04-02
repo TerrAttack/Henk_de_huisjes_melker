@@ -2,71 +2,75 @@
 
 public class RoomManager : MonoBehaviour
 {
-	#region Variables
-	private Room[] rooms;
-    private Room selectedRoom;
-    private bool roomIsSelected = false;
-	#endregion
+	public  Room[]  rooms;
+    private Room    selectedRoom;
+
+    [SerializeField] EconomyManagerScript moneyScript;
 
 	private void Start()
-    {
+	{
         rooms = new Room[transform.childCount];
 
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             GameObject t = transform.GetChild(i).gameObject;
 
             rooms[i] = t.GetComponent<Room>();
-            rooms[i].Id = i;
-            rooms[i].RoomManager = this;
-        }
-    }
-    
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            UnSelect();
-    }
-
-    public void SetSelected(int id)
-    {
-        if(!roomIsSelected)
-        {
-            SelectRoom(id);
-            roomIsSelected = true;
-        }
-        else
-        {
-            rooms[selectedRoom.Id].SpriteRenderer.color = Color.white;
-            SelectRoom(id);
+            rooms[i].id = i;
+            rooms[i].roomManager = this;
         }
     }
 
-    private void SelectRoom(int id)
+    private void Update()
     {
-        if(!rooms[id].Unlocked)
-            rooms[id].Unlocked = true;
-        rooms[id].SetColor();
-        selectedRoom = rooms[id];
+        if(Input.GetMouseButtonDown(0))
+        {
+            bool roomGotSelected = false;
+            foreach(Room room in rooms)
+            {
+                if(room.CheckForClick())
+                {
+                    switch(room.roomState)
+                    {
+                        case Room.RoomState.Unlocked:
+                            SelectRoom(room);
+                            roomGotSelected = true;
+                            break;
+
+                        case Room.RoomState.Locked:
+                            if (moneyScript.money >= room.roomCost)
+                            {
+                                moneyScript.money -= room.roomCost;
+                                SelectRoom(room);
+                                roomGotSelected = true;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                
+            }
+            if(roomGotSelected == false)
+                UnSelect();
+        }
+    }
+
+    private void SelectRoom(Room _room)
+    {
+        if (selectedRoom != null)
+            selectedRoom.SwitchState(Room.RoomState.Unlocked);
+        _room.SwitchState(Room.RoomState.Selected);
+        selectedRoom = _room;
     }
 
     private void UnSelect()
     {
-        roomIsSelected = false;
-        if(selectedRoom != null) selectedRoom.SpriteRenderer.color = Color.white;
-        selectedRoom = null;
-    }
-
-    public Room[] Rooms
-    {
-        get { return rooms; }
-    }
-    public Room SelectedRoom
-    {
-        get { return selectedRoom; }
-    }
-    public bool RoomIsSelected
-    {
-        get { return roomIsSelected; }
+        if(selectedRoom != null)
+        {
+            selectedRoom.SwitchState(Room.RoomState.Unlocked);
+            selectedRoom = null;
+        }  
     }
 }

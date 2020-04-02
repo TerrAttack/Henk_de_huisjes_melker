@@ -8,11 +8,6 @@ public class EconomyManagerScript : MonoBehaviour
     [SerializeField] public int money;
     [SerializeField] TextMeshProUGUI moneyText = null;
 
-    void Start()
-    {
-        money = 0;    
-    }
-
     private void Update()
     {
         moneyText.text = money.ToString();

@@ -2,80 +2,92 @@
 
 public class Room : MonoBehaviour
 {
-    #region Variables
-    private SpriteRenderer spriterRenderer;
-    private BoxCollider2D boxCollider2D;
-    private RoomManager roomManager;
-    private int id;
-
-    private bool isUnlocked = false;
-
-    [SerializeField]
-    public Color c;
-    #endregion
-
-    enum RoomState
+    public enum RoomState
     {
-        Locked,
         Unlocked,
         Selected,
+        Locked,
     };
 
-    void Start()
+    public enum RoomType
     {
-        spriterRenderer = GetComponent<SpriteRenderer>();
+        BedRoom,
+        LivingRoom,
+        Kitchen,
+        BathRoom,
+        Enterence,
+        Stairs,
+    };
+
+    public int id;
+    public int level = 1;
+
+    [SerializeField] public Sprite LockedSprite;
+    [SerializeField] public Sprite HighLightSprite;
+
+    [SerializeField] public int roomCost = 100;
+
+    [SerializeField] public RoomType  roomType = RoomType.BedRoom;
+    [SerializeField] public RoomState roomState = RoomState.Locked;
+
+    [SerializeField] Sprite roomSprite;
+    [SerializeField] GameObject overlay;
+
+    SpriteRenderer overlaySpriteRenderer;
+    SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider2D;
+
+    public RoomManager roomManager;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-    }
-    private void Update()
-    {
-        CheckForClick();
-        if(!Unlocked)
-        {
-            spriterRenderer.color = Color.gray;
-        }
+        overlaySpriteRenderer = overlay.GetComponent<SpriteRenderer>();
+        overlaySpriteRenderer.sprite = LockedSprite;
+
+        SwitchState(roomState);
     }
 
-    private void CheckForClick()
+    private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        
+
+    }
+
+    public void SwitchState(RoomState _roomState)
+    {
+        switch (_roomState)
+        {
+            case RoomState.Locked:
+                overlay.SetActive(true);
+                overlaySpriteRenderer.sprite = LockedSprite;
+                break;
+
+            case RoomState.Unlocked:
+                overlay.SetActive(false);
+                break;
+
+            case RoomState.Selected:
+                overlay.SetActive(true);
+                overlaySpriteRenderer.sprite = HighLightSprite;
+                break;
+
+            default:
+                break;
+        }
+        roomState = _roomState;
+    }
+
+    public bool CheckForClick()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (boxCollider2D.OverlapPoint(worldPosition))
-                RoomPressed();
+                return true;
+            return false;
         }
-    }
-    public void SetColor()
-    {
-        spriterRenderer.color = c;
-    }
-    public void RoomPressed()
-    {
-        roomManager.SetSelected(id);
-    }
-
-    public RoomManager RoomManager
-    {
-        get { return roomManager; }
-        set { roomManager = value; }
-    }
-    public SpriteRenderer SpriteRenderer
-    {
-        get { return spriterRenderer; }
-        set { spriterRenderer = value; }
-    }
-    public BoxCollider2D BoxCollider2D
-    {
-        get { return boxCollider2D; }
-        set { boxCollider2D = value; }
-    }
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
-    }
-    public bool Unlocked
-    {
-        get { return isUnlocked; }
-        set { isUnlocked = value; }
+        return false;
     }
 }
