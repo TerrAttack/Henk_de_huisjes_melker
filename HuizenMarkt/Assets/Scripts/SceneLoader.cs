@@ -6,8 +6,14 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] Object scene;
     [SerializeField] float delay = 0;
+    [SerializeField] bool OnStart;
 
-    public void loadScene()
+    public void Start()
+    {
+        if(OnStart) StartCoroutine(loadSceneDelay());
+    }
+
+    public void LoadScene()
     {
         StartCoroutine(loadSceneDelay());
     }
