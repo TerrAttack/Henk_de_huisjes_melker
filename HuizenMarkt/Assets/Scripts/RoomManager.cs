@@ -27,6 +27,7 @@ public class RoomManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             UnSelect();
     }
+
     public void SetSelected(int id)
     {
         if(!roomIsSelected)

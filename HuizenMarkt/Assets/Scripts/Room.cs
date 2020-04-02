@@ -2,8 +2,8 @@
 
 public class Room : MonoBehaviour
 {
-	#region Variables
-	private SpriteRenderer spriterRenderer;
+    #region Variables
+    private SpriteRenderer spriterRenderer;
     private BoxCollider2D boxCollider2D;
     private RoomManager roomManager;
     private int id;
@@ -13,6 +13,13 @@ public class Room : MonoBehaviour
     [SerializeField]
     public Color c;
     #endregion
+
+    enum RoomState
+    {
+        Locked,
+        Unlocked,
+        Selected,
+    };
 
     void Start()
     {
