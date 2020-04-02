@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] Object scene;
+    [SerializeField] Object scene = null;
     [SerializeField] float delay = 0;
-    [SerializeField] bool OnStart;
+    [SerializeField] bool OnStart = false;
 
     public void Start()
     {
