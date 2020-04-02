@@ -30,6 +30,7 @@ public class RoomManager : MonoBehaviour
             {
                 if(room.CheckForClick())
                 {
+                    
                     switch(room.roomState)
                     {
                         case Room.RoomState.Unlocked:
