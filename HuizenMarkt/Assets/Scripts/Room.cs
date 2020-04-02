@@ -53,7 +53,7 @@ public class Room : MonoBehaviour
     {
         
 
-    }
+    } 
 
     public void SwitchState(RoomState _roomState)
     {
