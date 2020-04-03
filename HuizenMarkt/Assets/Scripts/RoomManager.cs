@@ -25,7 +25,7 @@ public class RoomManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            bool roomGotSelected = false;
+            //bool roomGotSelected = false;
             foreach(Room room in rooms)
             {
                 if(room.CheckForClick())
@@ -35,7 +35,7 @@ public class RoomManager : MonoBehaviour
                     {
                         case Room.RoomState.Unlocked:
                             SelectRoom(room);
-                            roomGotSelected = true;
+                            //roomGotSelected = true;
                             break;
 
                         case Room.RoomState.Locked:
@@ -43,7 +43,7 @@ public class RoomManager : MonoBehaviour
                             {
                                 moneyScript.money -= room.roomCost;
                                 SelectRoom(room);
-                                roomGotSelected = true;
+                                //roomGotSelected = true;
                             }
                             break;
 
@@ -53,8 +53,18 @@ public class RoomManager : MonoBehaviour
                 }
                 
             }
-            if(roomGotSelected == false)
-                UnSelect();
+            //if(roomGotSelected == false)
+                //UnSelect();
+        }
+    }
+
+    public void UpgradeSelectedRoom()
+    {
+        Debug.Log(selectedRoom);
+        if(selectedRoom != null && moneyScript.money >= selectedRoom.upgradeCost)
+        {
+            moneyScript.money -= selectedRoom.upgradeCost;
+            selectedRoom.Upgrade();
         }
     }
 
