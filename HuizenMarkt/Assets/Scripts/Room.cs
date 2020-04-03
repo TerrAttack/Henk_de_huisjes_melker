@@ -3,7 +3,8 @@ using TMPro;
 
 public class Room : MonoBehaviour
 {
-    public enum RoomState
+	#region Enums
+	public enum RoomState
     {
         Unlocked,
         Selected,
@@ -19,31 +20,42 @@ public class Room : MonoBehaviour
         Enterence,
         Stairs,
     };
+	#endregion
 
-    public int id;
-    public int level = 1;
+	#region Variables
+	[HideInInspector] public int id;
+    [HideInInspector] public int level = 1;
+    [HideInInspector] public RoomManager roomManager;
 
-    [SerializeField] public Sprite LockedSprite;
-    [SerializeField] public Sprite HighLightSprite;
+    [Header("Room Sprites")]
+    [SerializeField] Sprite roomSprite;
 
+
+    [Header("Costs")]
     [SerializeField] public int roomCost = 100;
     [SerializeField] public int upgradeCost = 100;
 
+    [Header("Room")]
     [SerializeField] public RoomType  roomType = RoomType.BedRoom;
     [SerializeField] public RoomState roomState = RoomState.Locked;
 
-    [SerializeField] Sprite roomSprite;
+    [Header("Overlay Objects")]
     [SerializeField] GameObject overlay;
     [SerializeField] GameObject textOverlay;
 
-    TextMeshPro textOverlayText;
+    [Header("Overlay Sprites")]
+    [SerializeField] public Sprite LockedSprite;
+    [SerializeField] public Sprite HighLightSprite;
+
     SpriteRenderer overlaySpriteRenderer;
     SpriteRenderer spriteRenderer;
+
+    TextMeshPro textOverlayText;
     BoxCollider2D boxCollider2D;
+	#endregion
 
-    public RoomManager roomManager;
-
-    private void Start()
+	#region Methodes
+	private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -53,12 +65,6 @@ public class Room : MonoBehaviour
         textOverlayText.text = level.ToString();
         SetType(roomType);
         SwitchState(roomState);
-    }
-
-    public void Upgrade()
-    {
-        level++;
-        textOverlayText.text = level.ToString();
     }
 
     public void SetType(RoomType _roomType)
@@ -121,4 +127,11 @@ public class Room : MonoBehaviour
         }
         return false;
     }
+
+    public void Upgrade()
+    {
+        level++;
+        textOverlayText.text = level.ToString();
+    }
+	#endregion
 }

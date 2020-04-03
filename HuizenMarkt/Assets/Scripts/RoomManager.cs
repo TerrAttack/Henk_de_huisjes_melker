@@ -2,86 +2,84 @@
 
 public class RoomManager : MonoBehaviour
 {
-	public  Room[]  rooms;
-    private Room    selectedRoom;
+	public Room[] rooms;
+	private Room selectedRoom;
+	public bool roomGotSelected = false;
 
-    [SerializeField] EconomyManagerScript moneyScript;
+	[SerializeField] EconomyManagerScript moneyScript;
 
 	private void Start()
 	{
-        rooms = new Room[transform.childCount];
+		rooms = new Room[transform.childCount];
 
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject t = transform.GetChild(i).gameObject;
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			GameObject t = transform.GetChild(i).gameObject;
 
-            rooms[i] = t.GetComponent<Room>();
-            rooms[i].id = i;
-            rooms[i].roomManager = this;
-        }
-    }
+			rooms[i] = t.GetComponent<Room>();
+			rooms[i].id = i;
+			rooms[i].roomManager = this;
+		}
+	}
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            //bool roomGotSelected = false;
-            foreach(Room room in rooms)
-            {
-                if(room.CheckForClick())
-                {
-                    
-                    switch(room.roomState)
-                    {
-                        case Room.RoomState.Unlocked:
-                            SelectRoom(room);
-                            //roomGotSelected = true;
-                            break;
+	public void ClickCheck()
+	{
+		roomGotSelected = false;
 
-                        case Room.RoomState.Locked:
-                            if (moneyScript.money >= room.roomCost)
-                            {
-                                moneyScript.money -= room.roomCost;
-                                SelectRoom(room);
-                                //roomGotSelected = true;
-                            }
-                            break;
+		foreach (Room room in rooms)
+		{
+			if (room.CheckForClick())
+			{
 
-                        default:
-                            break;
-                    }
-                }
-                
-            }
-            //if(roomGotSelected == false)
-                //UnSelect();
-        }
-    }
+				switch (room.roomState)
+				{
+					case Room.RoomState.Unlocked:
+						SelectRoom(room);
+						roomGotSelected = true;
+						break;
 
-    public void UpgradeSelectedRoom()
-    {
-        Debug.Log(selectedRoom);
-        if(selectedRoom != null && moneyScript.money >= selectedRoom.upgradeCost)
-        {
-            moneyScript.money -= selectedRoom.upgradeCost;
-            selectedRoom.Upgrade();
-        }
-    }
+					case Room.RoomState.Locked:
+						if (moneyScript.money >= room.roomCost)
+						{
+							moneyScript.money -= room.roomCost;
+							SelectRoom(room);
+							roomGotSelected = true;
+						}
+						break;
 
-    private void SelectRoom(Room _room)
-    {
-        if (selectedRoom != null)
-            selectedRoom.SwitchState(Room.RoomState.Unlocked);
-        _room.SwitchState(Room.RoomState.Selected);
-        selectedRoom = _room;
-    }
+					default:
+						break;
+				}
+			}
+		}
+		if (!roomGotSelected)
+			UnSelect();
+	}
 
-    private void UnSelect()
-    {
-        if(selectedRoom != null)
-        {
-            selectedRoom.SwitchState(Room.RoomState.Unlocked);
-            selectedRoom = null;
-        }  
-    }
+	public void UpgradeSelectedRoom()
+	{
+		Debug.Log(selectedRoom);
+		if (selectedRoom != null && moneyScript.money >= selectedRoom.upgradeCost)
+		{
+			moneyScript.money -= selectedRoom.upgradeCost;
+			selectedRoom.Upgrade();
+		}
+	}
+
+	private void SelectRoom(Room _room)
+	{
+		if (selectedRoom != null)
+			selectedRoom.SwitchState(Room.RoomState.Unlocked);
+		_room.SwitchState(Room.RoomState.Selected);
+		selectedRoom = _room;
+	}
+
+	private void UnSelect()
+	{
+		if (selectedRoom != null)
+		{
+			selectedRoom.SwitchState(Room.RoomState.Unlocked);
+			selectedRoom = null;
+		}
+	}
 }
