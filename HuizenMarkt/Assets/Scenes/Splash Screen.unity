@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 490526539}
   - component: {fileID: 490526538}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,8 +543,8 @@ Canvas:
   m_GameObject: {fileID: 863205063}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1650915637}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -658,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 6330978354397001159, guid: c588a81b862568f418d2d15f3723c9a8,
         type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: SceneLoader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c588a81b862568f418d2d15f3723c9a8, type: 3}

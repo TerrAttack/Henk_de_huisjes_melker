@@ -41,7 +41,6 @@ public class Room : MonoBehaviour
 
     [Header("Overlay Objects")]
     [SerializeField] GameObject overlay;
-    [SerializeField] GameObject textOverlay;
 
     [Header("Overlay Sprites")]
     [SerializeField] public Sprite LockedSprite;
@@ -50,7 +49,6 @@ public class Room : MonoBehaviour
     SpriteRenderer overlaySpriteRenderer;
     SpriteRenderer spriteRenderer;
 
-    TextMeshPro textOverlayText;
     BoxCollider2D boxCollider2D;
 	#endregion
 
@@ -61,8 +59,6 @@ public class Room : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         overlaySpriteRenderer = overlay.GetComponent<SpriteRenderer>();
         overlaySpriteRenderer.sprite = LockedSprite;
-        textOverlayText = textOverlay.GetComponent<TextMeshPro>();
-        textOverlayText.text = level.ToString();
         SetType(roomType);
         SwitchState(roomState);
     }
@@ -131,7 +127,7 @@ public class Room : MonoBehaviour
     public void Upgrade()
     {
         level++;
-        textOverlayText.text = level.ToString();
+        upgradeCost += upgradeCost / 2;
     }
 	#endregion
 }
