@@ -6,12 +6,14 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] RoomManager roomManager = null;
+    [SerializeField] HouseManager houseManager = null;
 
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !IsMouseOverUIWithIgnores())
             roomManager.ClickCheck();
+            houseManager.ClickCheck();
     }
 
     private bool IsMouseOverUI()

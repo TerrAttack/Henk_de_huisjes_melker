@@ -38,6 +38,7 @@ public class Room : MonoBehaviour
     [Header("Room")]
     [SerializeField] public RoomType  roomType = RoomType.BedRoom;
     [SerializeField] public RoomState roomState = RoomState.Locked;
+    [SerializeField] public House inHouse;
 
     [Header("Overlay Objects")]
     [SerializeField] GameObject overlay;
@@ -114,7 +115,7 @@ public class Room : MonoBehaviour
 
     public bool CheckForClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && inHouse.houseState == 0)
         {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (boxCollider2D.OverlapPoint(worldPosition))
