@@ -38,6 +38,12 @@ public class Student : MonoBehaviour
 
     private void Update()
     {
+        Movement();
+
+    }
+
+    private void Movement()
+    {
         if (studentState == StudentState.Idle)
             studentActivity = ChooseActivity();
         if (studentActivity != StudentActivity.Nothing && CalculateMovement(GetPosition()) != Vector2.zero)
@@ -47,7 +53,22 @@ public class Student : MonoBehaviour
         }
         if (studentActivity != StudentActivity.Nothing && CalculateMovement(GetPosition()) == Vector2.zero)
             studentState = StudentState.DoingActivity;
-            
+    }
+
+    private StudentActivity ChooseActivity()
+    {
+        int rand = new System.Random().Next(0, 2);
+        switch (rand)
+        {
+            case 0:
+                return StudentActivity.Chilling;
+            case 1:
+                return StudentActivity.Cooking;
+            case 2:
+                return StudentActivity.Sleeping;
+            default:
+                return StudentActivity.Nothing;
+        }
     }
 
     private Vector2 GetPosition()
@@ -62,22 +83,6 @@ public class Student : MonoBehaviour
                 return waypoints.kitchenWaypoint.transform.position;
             default:
                 return Vector2.zero;
-        }
-    }
-
-    private StudentActivity ChooseActivity()
-    {
-        int rand = new System.Random().Next(0,2);
-        switch(rand)
-        {
-            case 0:
-                return StudentActivity.Chilling;
-            case 1:
-                return StudentActivity.Cooking;
-            case 2:
-                return StudentActivity.Sleeping;
-            default:
-                return StudentActivity.Nothing;
         }
     }
 
