@@ -20,9 +20,9 @@ public class Room : MonoBehaviour
         Enterence,
         Stairs,
     };
-	#endregion
+    #endregion
 
-	#region Variables
+    #region Variables
 	[HideInInspector] public int id;
     [HideInInspector] public int level = 1;
     [HideInInspector] public RoomManager roomManager;
@@ -126,8 +126,9 @@ public class Room : MonoBehaviour
 
     public void Upgrade()
     {
-        level++;
         upgradeCost += upgradeCost / 2;
+        level++;
     }
 	#endregion
+
 }

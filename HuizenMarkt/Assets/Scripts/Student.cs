@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Student : MonoBehaviour
 {
-    public enum StudentActivity
+	#region Enums
+	public enum StudentActivity
     {
         Nothing,
         Chilling,
@@ -22,13 +21,18 @@ public class Student : MonoBehaviour
 
     public StudentActivity studentActivity = StudentActivity.Nothing;
     public StudentState studentState = StudentState.Idle;
+	#endregion
 
-
-    public float StudentSpeed { get; set; }
+	#region Variables
+	[SerializeField] public Animator animator;
     [SerializeField] public Room appartment;
-    private WaypointHandler waypoints;
 
-    private void Start()
+    [SerializeField] public float StudentSpeed { get; set; }
+    private WaypointHandler waypoints;
+	#endregion
+
+	#region Methodes
+	private void Start()
     {
         StudentSpeed = 1f;
         foreach (Transform child in appartment.transform)
@@ -39,17 +43,22 @@ public class Student : MonoBehaviour
     private void Update()
     {
         Movement();
-
     }
 
     private void Movement()
     {
         if (studentState == StudentState.Idle)
+        {
             studentActivity = ChooseActivity();
+        }
+        if (studentState == StudentState.Idle || studentState == StudentState.DoingActivity)
+            animator.SetBool("Moving", false);
+
         if (studentActivity != StudentActivity.Nothing && CalculateMovement(GetPosition()) != Vector2.zero)
         {
             MoveTo(GetPosition());
             studentState = StudentState.Walking;
+            animator.SetBool("Moving", true);
         }
         if (studentActivity != StudentActivity.Nothing && CalculateMovement(GetPosition()) == Vector2.zero)
             studentState = StudentState.DoingActivity;
@@ -89,6 +98,9 @@ public class Student : MonoBehaviour
     public void MoveTo(Vector2 _waypoint)
     {
         this.transform.Translate(CalculateMovement(_waypoint) * Time.deltaTime, Space.World);
+        if (Math.Abs(GetDistance(_waypoint).x) < 0.01f && Math.Abs(GetDistance(_waypoint).y) < 0.01f)
+            transform.position = _waypoint;
+            
     }
 
     private Vector2 CalculateMovement(Vector2 _waypoint)
@@ -113,10 +125,14 @@ public class Student : MonoBehaviour
             movement.y = -StudentSpeed;
 
         if (Math.Abs(distance.x) < margin)
-            movement.x = 0;
+            movement.x = 0; 
+            
         if (Math.Abs(distance.y) < margin)
             movement.y = 0;
-        
+
+        animator.SetFloat("HorizontalSpeed", movement.x);
+        Debug.Log(movement.x);
+
         return movement;
     }
 
@@ -124,4 +140,5 @@ public class Student : MonoBehaviour
     {
         return _waypoint - new Vector2(this.transform.position.x, this.transform.position.y);
     }
+	#endregion
 }
