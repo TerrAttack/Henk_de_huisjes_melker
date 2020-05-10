@@ -153,7 +153,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 55a3357b63911214dbf322b22af6a045, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   upgradeCost: 100
   roomType: 0
   roomState: 2
+  inHouse: {fileID: 0}
   overlay: {fileID: 6746177178575564001}
   LockedSprite: {fileID: 21300000, guid: 2f23d1a60613ce840b81675ed918513c, type: 3}
   HighLightSprite: {fileID: 21300000, guid: cab7876f01f77a74a9ecf785b6617381, type: 3}
