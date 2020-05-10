@@ -21,10 +21,14 @@ public class Student : MonoBehaviour
 
     public StudentActivity studentActivity = StudentActivity.Nothing;
     public StudentState studentState = StudentState.Idle;
-	#endregion
+    #endregion
 
-	#region Variables
-	[SerializeField] public Animator animator;
+    #region Variables
+    public int currentMoney;
+    public int income;
+    public float happiness = 100;
+
+    [SerializeField] public Animator animator;
     [SerializeField] public Room appartment;
 
     [SerializeField] public float StudentSpeed { get; set; }
@@ -131,7 +135,6 @@ public class Student : MonoBehaviour
             movement.y = 0;
 
         animator.SetFloat("HorizontalSpeed", movement.x);
-        Debug.Log(movement.x);
 
         return movement;
     }
