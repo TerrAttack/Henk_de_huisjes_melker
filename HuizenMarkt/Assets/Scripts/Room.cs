@@ -34,6 +34,7 @@ public class Room : MonoBehaviour
     [Header("Costs")]
     [SerializeField] public int roomCost = 100;
     [SerializeField] public int upgradeCost = 100;
+    [SerializeField] public int maintenanceCost = 20;
 
     [Header("Room")]
     [SerializeField] public RoomType  roomType = RoomType.BedRoom;
@@ -119,7 +120,7 @@ public class Room : MonoBehaviour
 
     public bool CheckForClick()
     {
-        if (Input.GetMouseButtonDown(0) && inHouse.houseState == 0)
+        if (Input.GetMouseButtonDown(0) && inHouse.houseState != House.HouseState.Locked)
         {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (boxCollider2D.OverlapPoint(worldPosition))
@@ -132,6 +133,12 @@ public class Room : MonoBehaviour
     public void Upgrade()
     {
         upgradeCost += upgradeCost / 2;
+        rent += rent / 6;
+        maintenanceCost += maintenanceCost / 3;
+        if(maintenanceCost > rent)
+        {
+            maintenanceCost = rent;
+        }
         level++;
     }
 	#endregion
