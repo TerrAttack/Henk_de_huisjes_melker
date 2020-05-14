@@ -3,7 +3,6 @@
 public class RoomManager : MonoBehaviour
 {
 	public Room[] rooms;
-	private Room selectedRoom;
 	private bool roomGotSelected = false;
 
 	[SerializeField] EconomyManagerScript moneyScript;
@@ -58,32 +57,29 @@ public class RoomManager : MonoBehaviour
 
 	public void UpgradeSelectedRoom()
 	{
-		if (selectedRoom != null && moneyScript.money >= selectedRoom.upgradeCost)
+		if (SelectedRoom != null && moneyScript.money >= SelectedRoom.upgradeCost)
 		{
-			moneyScript.money -= selectedRoom.upgradeCost;
-			selectedRoom.Upgrade();
+			moneyScript.money -= SelectedRoom.upgradeCost;
+			SelectedRoom.Upgrade();
 		}
 	}
 
 	private void SelectRoom(Room _room)
 	{
-		if (selectedRoom != null)
-			selectedRoom.SwitchState(Room.RoomState.Unlocked);
+		if (SelectedRoom != null)
+			SelectedRoom.SwitchState(Room.RoomState.Unlocked);
 		_room.SwitchState(Room.RoomState.Selected);
-		selectedRoom = _room;
+		SelectedRoom = _room;
 	}
 
 	public void UnSelect()
 	{
-		if (selectedRoom != null)
+		if (SelectedRoom != null)
 		{
-			selectedRoom.SwitchState(Room.RoomState.Unlocked);
-			selectedRoom = null;
+			SelectedRoom.SwitchState(Room.RoomState.Unlocked);
+			SelectedRoom = null;
 		}
 	}
 
-	public Room SelectedRoom
-	{
-		get { return selectedRoom; }
-	}
+	public Room SelectedRoom { get; private set; }
 }

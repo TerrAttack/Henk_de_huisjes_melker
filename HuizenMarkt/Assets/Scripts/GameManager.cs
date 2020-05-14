@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !IsMouseOverUIWithIgnores())
+        {
             roomManager.ClickCheck();
             houseManager.ClickCheck();
+        }
+            
     }
 
     private bool IsMouseOverUI()
