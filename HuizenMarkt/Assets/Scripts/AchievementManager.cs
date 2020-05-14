@@ -11,6 +11,7 @@ public class AchievementManager : MonoBehaviour
     public GameObject AchievementsMenu;
     Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
     public Sprite UnlockedSprite;
+    public EconomyManagerScript moneyScript;
     private static AchievementManager instance;
 
     public static AchievementManager Instance {
@@ -36,10 +37,6 @@ public class AchievementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            AchievementsMenu.SetActive(!AchievementsMenu.activeSelf);
-        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             EarnAchievement("Press W");
@@ -48,7 +45,6 @@ public class AchievementManager : MonoBehaviour
         {
             EarnAchievement("Press S");
         }
-
     }
 
     public void EarnAchievement(string title)

@@ -33,6 +33,7 @@ public class Achievement
         {
             unlocked = true;
             achievementRef.GetComponent<Image>().sprite = AchievementManager.Instance.UnlockedSprite;
+            AchievementManager.Instance.moneyScript.money += points;
             return true;
         }
         return false;
