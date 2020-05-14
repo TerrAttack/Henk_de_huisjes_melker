@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] RoomManager roomManager = null;
     [SerializeField] HouseManager houseManager = null;
+    [SerializeField] RoomStatsUI roomStatsUI = null;
 
 
     void Update()
@@ -15,8 +16,8 @@ public class GameManager : MonoBehaviour
         {
             roomManager.ClickCheck();
             houseManager.ClickCheck();
+            roomStatsUI.CheckInfoUIClick();
         }
-            
     }
 
     private bool IsMouseOverUI()

@@ -6,7 +6,7 @@ public class HouseManager : MonoBehaviour
 	private House selectedHouse;
 	private bool houseGotSelected = false;
 
-	[SerializeField] EconomyManagerScript moneyScript;
+	[SerializeField] EconomyManagerScript moneyScript = null;
 
 	private void Start()
 	{

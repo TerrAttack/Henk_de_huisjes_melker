@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using UnityEngine;
 
 public class Student : MonoBehaviour
@@ -33,10 +34,12 @@ public class Student : MonoBehaviour
 
     [SerializeField] public float StudentSpeed { get; set; }
     private WaypointHandler waypoints;
-	#endregion
 
-	#region Methodes
-	private void Start()
+    float studentActivityTimer;
+    #endregion
+
+    #region Methodes
+    private void Start()
     {
         StudentSpeed = 1f;
         foreach (Transform child in appartment.transform)
@@ -46,7 +49,20 @@ public class Student : MonoBehaviour
 
     private void Update()
     {
+        if(studentState == StudentState.DoingActivity)
+            studentActivityTimer += Time.deltaTime;
+        SwitchStudentActivity();
         Movement();
+        
+    }
+
+    private void SwitchStudentActivity()
+    {
+        if(studentActivityTimer >= 10)
+        {
+            studentActivity = ChooseActivity();
+            studentActivityTimer = 0;
+        }        
     }
 
     private void Movement()
@@ -70,7 +86,7 @@ public class Student : MonoBehaviour
 
     private StudentActivity ChooseActivity()
     {
-        int rand = new System.Random().Next(0, 2);
+        int rand = new System.Random().Next(0, 3);
         switch (rand)
         {
             case 0:

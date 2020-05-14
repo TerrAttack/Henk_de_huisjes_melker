@@ -5,7 +5,7 @@ public class RoomManager : MonoBehaviour
 	public Room[] rooms;
 	private bool roomGotSelected = false;
 
-	[SerializeField] EconomyManagerScript moneyScript;
+	[SerializeField] EconomyManagerScript moneyScript = null;
 
 	private void Start()
 	{

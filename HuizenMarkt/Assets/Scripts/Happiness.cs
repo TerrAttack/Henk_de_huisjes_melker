@@ -44,7 +44,6 @@ public class Happiness : MonoBehaviour
     void Update()
     {
         float i = Mathf.Clamp(student.happiness, 0, 100);
-        Debug.Log(i + " " + student.happiness);
         sprite.color = ColorFromGradient(i/100);
     }
 
