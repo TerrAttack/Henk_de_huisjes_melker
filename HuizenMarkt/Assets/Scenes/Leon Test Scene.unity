@@ -642,9 +642,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomStats: {fileID: 1730017973}
+  roomManager: {fileID: 500368806}
   InfoOverlay: {fileID: 123364427}
   InfoOverlayBackground: {fileID: 2014923717}
-  RentText: {fileID: 607552365}
+  Rent: {fileID: 1297112499}
 --- !u!1 &607552363
 GameObject:
   m_ObjectHideFlags: 0

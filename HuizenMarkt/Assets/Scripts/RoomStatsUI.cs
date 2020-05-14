@@ -8,13 +8,17 @@ public class RoomStatsUI : MonoBehaviour
     [Header("RoomStats UI")]
     [SerializeField] public GameObject RoomStats;
 
+    [Header("Dependencies")]
+    [SerializeField] public RoomManager roomManager;
+
     [Header("Room Info")]
     [SerializeField] public GameObject InfoOverlay;
     [SerializeField] public GameObject InfoOverlayBackground;
-    [SerializeField] public TextMeshProUGUI RentText;
-
+    [SerializeField] public TextMeshProUGUI Rent;
 
     private BoxCollider2D InfoOverlayCollider;
+
+    
 
     public int RoomPrize { get; set; }
 
@@ -23,14 +27,24 @@ public class RoomStatsUI : MonoBehaviour
         InfoOverlayCollider = InfoOverlayBackground.GetComponent<BoxCollider2D>();
     }
 
+    public void RoomSelected()
+    {
+
+    }
+
     public void UpgradeButtonClicked()
     {
 
     }
 
-    public void InfoButtonClicked()
+	#region Info Screen
+
+	public void InfoButtonClicked()
     {
+        if (roomManager.SelectedRoom == null)
+            return;
         InfoOverlay.SetActive(!InfoOverlay.activeSelf);
+        GetRoomInfo();
     }
 
     public void DeactivateInfoOverlay()
@@ -43,7 +57,7 @@ public class RoomStatsUI : MonoBehaviour
         switch(_type)
         {
             case "rent":
-                RentText.text = _num.ToString();
+                Rent.text = _num.ToString();
                 break;
 
             default:
@@ -56,7 +70,7 @@ public class RoomStatsUI : MonoBehaviour
         switch (_type)
         {
             case "rent":
-                RentText.text = _text;
+                Rent.text = _text;
                 break;
 
             default:
@@ -81,4 +95,10 @@ public class RoomStatsUI : MonoBehaviour
         }
         return false;
     }
+
+    public void GetRoomInfo()
+    {
+        SetRoomInfo("rent", roomManager.SelectedRoom.rent);
+    }
+	#endregion
 }

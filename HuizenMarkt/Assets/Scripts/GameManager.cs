@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] RoomManager roomManager = null;
-    [SerializeField] HouseManager houseManager = null;
-    [SerializeField] RoomStatsUI roomStatsUI = null;
+    [SerializeField] public RoomManager roomManager = null;
+    [SerializeField] public HouseManager houseManager = null;
+    [SerializeField] public RoomStatsUI roomStatsUI = null;
 
 
     void Update()
