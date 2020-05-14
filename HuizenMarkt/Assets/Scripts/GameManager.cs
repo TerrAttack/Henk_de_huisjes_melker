@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class GameManager : MonoBehaviour
             roomManager.ClickCheck();
             houseManager.ClickCheck();
         }
-            
     }
 
     private bool IsMouseOverUI()
@@ -42,4 +42,5 @@ public class GameManager : MonoBehaviour
 
         return raycastResultsList.Count > 0;
     }
+
 }
