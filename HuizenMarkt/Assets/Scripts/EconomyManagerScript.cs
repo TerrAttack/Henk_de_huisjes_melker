@@ -12,7 +12,7 @@ public class EconomyManagerScript : MonoBehaviour
     [SerializeField] GameObject studentList = null;
     [SerializeField] TimeManager timeManager = null;
     public Student[] students;
-    public int totalMoney;
+    public int totalEarnedMoney;
     public int month = 1;
     public int lastMonth = 1;
 
@@ -22,7 +22,7 @@ public class EconomyManagerScript : MonoBehaviour
         month = timeManager.month;
         lastMonth = timeManager.month;
         moneyText.text = money.ToString();
-        totalMoney = money;
+        totalEarnedMoney = money;
 
         students = new Student[studentList.transform.childCount];
 
@@ -61,7 +61,7 @@ public class EconomyManagerScript : MonoBehaviour
             }
         }
         money += income;
-        totalMoney += income;
+        totalEarnedMoney += income;
     }
     public void payBills()
     {
@@ -69,9 +69,9 @@ public class EconomyManagerScript : MonoBehaviour
         foreach (Room room in roomManager.rooms)
         {
             
-            if (room.roomState == 0)
+            if (room.roomState != Room.RoomState.Locked)
             {
-                costs += 20;
+                costs += room.maintenanceCost;
             }
         }
         money -= costs;

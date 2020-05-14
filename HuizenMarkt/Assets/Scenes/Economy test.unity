@@ -1942,7 +1942,7 @@ PrefabInstance:
     - target: {fileID: 6746177178961443447, guid: a45742d1bc4b5274f8c41d98ccce1bf2,
         type: 3}
       propertyPath: roomState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6746177178961443447, guid: a45742d1bc4b5274f8c41d98ccce1bf2,
         type: 3}
@@ -5290,7 +5290,7 @@ PrefabInstance:
     - target: {fileID: 2253195983895419819, guid: 787ce205f57375d428df1be313efd0c4,
         type: 3}
       propertyPath: currentMoney
-      value: 1000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 2253195983895419822, guid: 787ce205f57375d428df1be313efd0c4,
         type: 3}
@@ -5949,7 +5949,7 @@ MonoBehaviour:
   studentList: {fileID: 1373177683}
   timeManager: {fileID: 1451712413}
   students: []
-  totalMoney: 0
+  totalEarnedMoney: 0
   month: 1
   lastMonth: 1
 --- !u!4 &1600017403
