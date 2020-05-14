@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class RoomStatsUI : MonoBehaviour
@@ -21,8 +19,15 @@ public class RoomStatsUI : MonoBehaviour
     [SerializeField] public GameObject UpgradeWindowBackground = null;
     [SerializeField] public TextMeshProUGUI UpgradeCost = null;
 
+    [Header("Student Info")]
+    [SerializeField] public GameObject StudentWindow = null;
+    [SerializeField] public GameObject StudentWindowBackground = null;
+    [SerializeField] public GameObject StudentList = null;
+    [SerializeField] public GameObject StudentPrefab = null;
+
     private BoxCollider2D InfoOverlayCollider;
     private BoxCollider2D UpgradeWindowCollider;
+    private BoxCollider2D StudentWindowCollider;
 
     public int RoomPrize { get; set; }
 
@@ -30,6 +35,7 @@ public class RoomStatsUI : MonoBehaviour
     {
         InfoOverlayCollider = InfoOverlayBackground.GetComponent<BoxCollider2D>();
         UpgradeWindowCollider = UpgradeWindowBackground.GetComponent<BoxCollider2D>();
+        StudentWindowCollider = StudentWindowBackground.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -45,6 +51,9 @@ public class RoomStatsUI : MonoBehaviour
         if (UpgradeWindow.activeSelf)
             if (!CheckForClickUpgrade())
                 DeactivateUpgradeOverlay();
+        if (StudentWindow.activeSelf)
+            if (!CheckForClickStudent())
+                DeactivateStudentWindow();
     }
 
     public void RoomSelected()
@@ -63,6 +72,8 @@ public class RoomStatsUI : MonoBehaviour
         if (roomManager.SelectedRoom == null)
             return;
         UpgradeWindow.SetActive(!UpgradeWindow.activeSelf);
+        StudentWindow.SetActive(false);
+        InfoOverlay.SetActive(false);
     }
 
     public void DeactivateUpgradeOverlay()
@@ -83,44 +94,14 @@ public class RoomStatsUI : MonoBehaviour
     }
 	#endregion
 
-	public void SetRoomInfo(string _type, int _num)
-    {
-        switch (_type)
-        {
-            case "rent":
-                Rent.text = _num.ToString();
-                break;
-            case "upgrade":
-                UpgradeCost.text = _num.ToString();
-                break;
-
-            default:
-                return;
-        }
-    }
-
-    public void SetRoomInfo(string _type, string _text)
-    {
-        switch (_type)
-        {
-            case "rent":
-                Rent.text = _text;
-                break;
-            case "upgrade":
-                UpgradeCost.text = _text.ToString();
-                break;
-
-            default:
-                return;
-        }
-    }
-
     #region Info Screen
     public void InfoButtonClicked()
     {
         if (roomManager.SelectedRoom == null)
             return;
         InfoOverlay.SetActive(!InfoOverlay.activeSelf);
+        StudentWindow.SetActive(false);
+        UpgradeWindow.SetActive(false);
         GetRoomInfo();
     }
 
@@ -145,5 +126,95 @@ public class RoomStatsUI : MonoBehaviour
     {
         SetRoomInfo("rent", roomManager.SelectedRoom.rent);
     }
-	#endregion
+    #endregion
+
+    #region Student Window
+    public void StudentButtonClicked()
+    {
+        if (roomManager.SelectedRoom == null)
+            return;
+        StudentWindow.SetActive(!StudentWindow.activeSelf);
+        InfoOverlay.SetActive(false);
+        UpgradeWindow.SetActive(false);
+        GetRoomInfo();
+    }
+    public void DeactivateStudentWindow()
+    {
+        StudentWindow.SetActive(false);
+    }
+    public bool CheckForClickStudent()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (StudentWindowCollider.OverlapPoint(worldPosition))
+                return true;
+            return false;
+        }
+        return false;
+    }
+
+    public void AddStudent()
+    {
+        GameObject student =  Instantiate(StudentPrefab, Vector3.zero, Quaternion.identity);
+        var g = student.GetComponent<Student>();
+        g.appartment = roomManager.SelectedRoom;
+        student.transform.parent = StudentList.transform;
+    }
+
+    public void EvictStudent()
+    {
+        for(int i = 0; i < StudentList.transform.childCount; i++)
+        {
+            var s = StudentList.transform.GetChild(i).gameObject;
+            var studentScript = s.GetComponent<Student>();
+            if (studentScript.appartment == roomManager.SelectedRoom)
+            {
+                Destroy(s);
+                return;
+            }
+                
+        }
+    }
+
+
+    #endregion
+
+    public void SetRoomInfo(string _type, int _num)
+    {
+        switch (_type)
+        {
+            case "rent":
+                Rent.text = _num.ToString();
+                break;
+            case "upgrade":
+                UpgradeCost.text = _num.ToString();
+                break;
+            case "student":
+                //UpgradeCost.text = _num.ToString();
+                break;
+
+            default:
+                return;
+        }
+    }
+
+    public void SetRoomInfo(string _type, string _text)
+    {
+        switch (_type)
+        {
+            case "rent":
+                Rent.text = _text;
+                break;
+            case "upgrade":
+                UpgradeCost.text = _text.ToString();
+                break;
+            case "student":
+                //UpgradeCost.text = _text;
+                break;
+
+            default:
+                return;
+        }
+    }
 }
