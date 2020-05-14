@@ -50,10 +50,14 @@ public class Room : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     BoxCollider2D boxCollider2D;
-	#endregion
 
-	#region Methodes
-	private void Start()
+    [Header("Student")]
+    [SerializeField] public int rent = 100;
+
+    #endregion
+
+    #region Methodes
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();

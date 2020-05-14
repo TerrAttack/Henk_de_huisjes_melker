@@ -143,5 +143,20 @@ public class Student : MonoBehaviour
     {
         return _waypoint - new Vector2(this.transform.position.x, this.transform.position.y);
     }
-	#endregion
+
+    public void PayRent()
+    {
+        if (currentMoney - appartment.rent >= 0)
+            currentMoney -= appartment.rent;
+        else
+            FileForBankruptcy();
+    }
+
+    public void FileForBankruptcy()
+    {
+        happiness -= 5;
+    }
+
+
+    #endregion
 }
