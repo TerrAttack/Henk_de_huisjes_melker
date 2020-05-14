@@ -16,20 +16,35 @@ public class RoomStatsUI : MonoBehaviour
     [SerializeField] public GameObject InfoOverlayBackground = null;
     [SerializeField] public TextMeshProUGUI Rent = null;
 
-    private BoxCollider2D InfoOverlayCollider;
+    [Header("Upgrade Info")]
+    [SerializeField] public GameObject UpgradeWindow = null;
+    [SerializeField] public GameObject UpgradeWindowBackground = null;
+    [SerializeField] public TextMeshProUGUI UpgradeCost = null;
 
-    
+    private BoxCollider2D InfoOverlayCollider;
+    private BoxCollider2D UpgradeWindowCollider;
 
     public int RoomPrize { get; set; }
 
     private void Start()
     {
         InfoOverlayCollider = InfoOverlayBackground.GetComponent<BoxCollider2D>();
+        UpgradeWindowCollider = UpgradeWindowBackground.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
     {
         RoomSelected();
+    }
+
+    public void CheckUIClick()
+    {
+        if(InfoOverlay.activeSelf)
+            if (!CheckForClickInfo())
+                DeactivateInfoOverlay();
+        if (UpgradeWindow.activeSelf)
+            if (!CheckForClickUpgrade())
+                DeactivateUpgradeOverlay();
     }
 
     public void RoomSelected()
@@ -42,32 +57,41 @@ public class RoomStatsUI : MonoBehaviour
         }
     }
 
-    public void UpgradeButtonClicked()
-    {
-
-    }
-
-	#region Info Screen
-
-	public void InfoButtonClicked()
+	#region Upgrade Window
+	public void UpgradeButtonClicked()
     {
         if (roomManager.SelectedRoom == null)
             return;
-        InfoOverlay.SetActive(!InfoOverlay.activeSelf);
-        GetRoomInfo();
+        UpgradeWindow.SetActive(!UpgradeWindow.activeSelf);
     }
 
-    public void DeactivateInfoOverlay()
+    public void DeactivateUpgradeOverlay()
     {
-        InfoOverlay.SetActive(false);
+        UpgradeWindow.SetActive(false);
     }
 
-    public void SetRoomInfo(string _type, int _num)
+    public bool CheckForClickUpgrade()
     {
-        switch(_type)
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (UpgradeWindowCollider.OverlapPoint(worldPosition))
+                return true;
+            return false;
+        }
+        return false;
+    }
+	#endregion
+
+	public void SetRoomInfo(string _type, int _num)
+    {
+        switch (_type)
         {
             case "rent":
                 Rent.text = _num.ToString();
+                break;
+            case "upgrade":
+                UpgradeCost.text = _num.ToString();
                 break;
 
             default:
@@ -82,19 +106,30 @@ public class RoomStatsUI : MonoBehaviour
             case "rent":
                 Rent.text = _text;
                 break;
+            case "upgrade":
+                UpgradeCost.text = _text.ToString();
+                break;
 
             default:
                 return;
         }
     }
 
-    public void CheckInfoUIClick()
+    #region Info Screen
+    public void InfoButtonClicked()
     {
-        if (!CheckForClick())
-            DeactivateInfoOverlay();
+        if (roomManager.SelectedRoom == null)
+            return;
+        InfoOverlay.SetActive(!InfoOverlay.activeSelf);
+        GetRoomInfo();
     }
 
-    public bool CheckForClick()
+    public void DeactivateInfoOverlay()
+    {
+        InfoOverlay.SetActive(false);
+    }
+
+    public bool CheckForClickInfo()
     {
         if (Input.GetMouseButtonDown(0))
         {

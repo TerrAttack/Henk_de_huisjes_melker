@@ -6,9 +6,17 @@ public class RoomManager : MonoBehaviour
 	private bool roomGotSelected = false;
 
 	[SerializeField] EconomyManagerScript moneyScript = null;
+	[SerializeField] GameObject gameHandler = null;
+	private RoomStatsUI r;
+
+	
 
 	private void Start()
 	{
+		r = gameHandler.GetComponent<RoomStatsUI>();
+
+
+
 		rooms = new Room[transform.childCount];
 
 		for (int i = 0; i < transform.childCount; i++)
@@ -19,6 +27,12 @@ public class RoomManager : MonoBehaviour
 			rooms[i].id = i;
 			rooms[i].roomManager = this;
 		}
+	}
+
+	private void Update()
+	{
+		if (SelectedRoom != null)
+			r.SetRoomInfo("upgrade", SelectedRoom.upgradeCost);
 	}
 
 	public void ClickCheck()

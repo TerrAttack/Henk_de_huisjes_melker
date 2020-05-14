@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         {
             roomManager.ClickCheck();
             houseManager.ClickCheck();
-            roomStatsUI.CheckInfoUIClick();
+            roomStatsUI.CheckUIClick();
         }
     }
 
