@@ -6,15 +6,15 @@ using TMPro;
 public class RoomStatsUI : MonoBehaviour
 {
     [Header("RoomStats UI")]
-    [SerializeField] public GameObject RoomStats;
+    [SerializeField] public GameObject RoomStats = null;
 
     [Header("Dependencies")]
-    [SerializeField] public RoomManager roomManager;
+    [SerializeField] public RoomManager roomManager = null;
 
     [Header("Room Info")]
-    [SerializeField] public GameObject InfoOverlay;
-    [SerializeField] public GameObject InfoOverlayBackground;
-    [SerializeField] public TextMeshProUGUI Rent;
+    [SerializeField] public GameObject InfoOverlay = null;
+    [SerializeField] public GameObject InfoOverlayBackground = null;
+    [SerializeField] public TextMeshProUGUI Rent = null;
 
     private BoxCollider2D InfoOverlayCollider;
 
@@ -27,9 +27,19 @@ public class RoomStatsUI : MonoBehaviour
         InfoOverlayCollider = InfoOverlayBackground.GetComponent<BoxCollider2D>();
     }
 
+    private void Update()
+    {
+        RoomSelected();
+    }
+
     public void RoomSelected()
     {
-
+        if (roomManager.SelectedRoom == null)
+            RoomStats.SetActive(false);
+        else
+        {
+            RoomStats.SetActive(true);
+        }
     }
 
     public void UpgradeButtonClicked()
