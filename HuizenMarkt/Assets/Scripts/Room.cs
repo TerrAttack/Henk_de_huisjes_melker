@@ -42,7 +42,7 @@ public class Room : MonoBehaviour
     [SerializeField] public House inHouse;
 
     [Header("Overlay Objects")]
-    [SerializeField] GameObject overlay;
+    [SerializeField] GameObject overlay = null;
 
     [Header("Overlay Sprites")]
     [SerializeField] public Sprite LockedSprite;

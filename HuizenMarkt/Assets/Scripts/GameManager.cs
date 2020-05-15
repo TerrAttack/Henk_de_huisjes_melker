@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] RoomManager roomManager = null;
-    [SerializeField] HouseManager houseManager = null;
+    [SerializeField] public RoomManager roomManager = null;
+    [SerializeField] public HouseManager houseManager = null;
+    [SerializeField] public RoomStatsUI roomStatsUI = null;
 
 
     void Update()
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
         {
             roomManager.ClickCheck();
             houseManager.ClickCheck();
+            roomStatsUI.CheckUIClick();
         }
     }
 

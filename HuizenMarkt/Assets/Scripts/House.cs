@@ -27,7 +27,7 @@ public class House : MonoBehaviour
     [SerializeField] public HouseState houseState = HouseState.Locked;
 
     [Header("Overlay Objects")]
-    [SerializeField] GameObject overlay;
+    [SerializeField] GameObject overlay = null;
 
     [Header("Overlay Sprites")]
     [SerializeField] public Sprite LockedSprite;
