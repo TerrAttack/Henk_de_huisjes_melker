@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RoomStatsUI : MonoBehaviour
 {
@@ -156,10 +157,21 @@ public class RoomStatsUI : MonoBehaviour
 
     public void AddStudent()
     {
-        GameObject student =  Instantiate(StudentPrefab, Vector3.zero, Quaternion.identity);
-        var g = student.GetComponent<Student>();
-        g.appartment = roomManager.SelectedRoom;
-        student.transform.parent = StudentList.transform;
+        int a = 0;
+        for(int i = 0; i < StudentList.transform.childCount; i++)
+        {
+            var s = StudentList.transform.GetChild(i).gameObject;
+            var studentScript = s.GetComponent<Student>();
+            if (studentScript.appartment == roomManager.SelectedRoom)
+                a++;
+        }
+        if(a < 2)
+        {
+            GameObject student = Instantiate(StudentPrefab, Vector3.zero, Quaternion.identity);
+            var g = student.GetComponent<Student>();
+            g.appartment = roomManager.SelectedRoom;
+            student.transform.parent = StudentList.transform;
+        }    
     }
 
     public void EvictStudent()
