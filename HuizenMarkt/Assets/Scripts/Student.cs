@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using UnityEngine;
 
 public class Student : MonoBehaviour
@@ -53,8 +52,22 @@ public class Student : MonoBehaviour
             studentActivityTimer += Time.deltaTime;
         SwitchStudentActivity();
         Movement();
-        
+        ItSmellsLikeBrokeInHere();
+
+
     }
+
+    public void ItSmellsLikeBrokeInHere()
+    {
+        if (appartment.rent < currentMoney)
+            happiness = 100;
+        if (appartment.rent > currentMoney/2)
+            happiness = 50;
+        if (appartment.rent > currentMoney)
+            happiness = 0;
+    }
+
+
 
     private void SwitchStudentActivity()
     {
@@ -160,7 +173,7 @@ public class Student : MonoBehaviour
         return _waypoint - new Vector2(this.transform.position.x, this.transform.position.y);
     }
 
-    public Boolean PayRent()
+    public bool PayRent()
     {
         if (currentMoney - appartment.rent >= 0)
         {
@@ -176,7 +189,7 @@ public class Student : MonoBehaviour
 
     public void FileForBankruptcy()
     {
-        happiness -= 5;
+        happiness = 0;
     }
 
 

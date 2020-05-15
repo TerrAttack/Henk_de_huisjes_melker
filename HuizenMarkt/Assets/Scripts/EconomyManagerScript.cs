@@ -6,74 +6,105 @@ using System.Data.SqlTypes;
 
 public class EconomyManagerScript : MonoBehaviour
 {
-    [SerializeField] public int money;
-    [SerializeField] TextMeshProUGUI moneyText = null;
-    [SerializeField] RoomManager roomManager = null;
-    [SerializeField] GameObject studentList = null;
-    [SerializeField] TimeManager timeManager = null;
-    public Student[] students;
-    public int totalEarnedMoney;
-    public int month = 1;
-    public int lastMonth = 1;
+	[SerializeField] public int money;
+	[SerializeField] TextMeshProUGUI moneyText = null;
+	[SerializeField] RoomManager roomManager = null;
+	[SerializeField] HouseManager houseManager = null;
+	[SerializeField] GameObject studentList = null;
+	[SerializeField] TimeManager timeManager = null;
+	public List<Student> students;
+	public int totalEarnedMoney;
+	public int month = 1;
+	public int lastMonth = 1;
 
 
-    void Start()
-    {
-        month = timeManager.month;
-        lastMonth = timeManager.month;
-        moneyText.text = money.ToString();
-        totalEarnedMoney = money;
+	void Start()
+	{
+		month = timeManager.month;
+		lastMonth = timeManager.month;
+		moneyText.text = money.ToString();
+		totalEarnedMoney = money;
 
-        students = new Student[studentList.transform.childCount];
+		students = new List<Student>();
+	}
 
-        for (int i = 0; i < studentList.transform.childCount; i++)
-        {
-            GameObject t = studentList.transform.GetChild(i).gameObject;
+	private void Update()
+	{
+		moneyText.text = money.ToString();
+		ChangeOverlay();
+		lastMonth = month;
+		month = timeManager.month;
+		if (month > lastMonth)
+		{
+			payCelery();
+			getPaid();
+			payBills();
+		}
+	}
 
-            students[i] = t.GetComponent<Student>();
-        }
-    }
+	public void payCelery()
+	{
+		foreach (Student student in students)
+		{
+			student.currentMoney += student.income;
+		}
+	}
 
-    private void Update()
-    {
-        moneyText.text = money.ToString();
+	public void getPaid()
+	{
+		int income = 0;
+		foreach (Student student in students)
+		{
 
-        lastMonth = month;
-        month = timeManager.month;
-        if (month > lastMonth)
-        {
-            getPaid();
-            payBills();
-        }
-    }
+			if (student.PayRent())
+			{
 
-    public void getPaid()
-    {
-        int income = 0;
-        foreach (Student student in students)
-        {
-            if (student.appartment.roomState != Room.RoomState.Locked)
-            {
-                if (student.PayRent())
-                {
-                    income += student.appartment.rent;
-                }
-            }
-        }
-        money += income;
-        totalEarnedMoney += income;
-    }
-    public void payBills()
-    {
-        int costs = 0;
-        foreach (Room room in roomManager.rooms)
-        {
-            
-            if (room.roomState != Room.RoomState.Locked)
-            {
-                costs += room.maintenanceCost;
-            }
-        }
-        money -= costs;
-    }
+				income += student.appartment.rent;
+
+			}
+
+		}
+		money += income;
+		totalEarnedMoney += income;
+	}
+	public void payBills()
+	{
+		int costs = 0;
+		foreach (Room room in roomManager.rooms)
+		{
+
+			if (room.roomState != Room.RoomState.Locked)
+			{
+				costs += room.maintenanceCost;
+			}
+		}
+		money -= costs;
+	}
+
+	public void ChangeOverlay()
+	{
+		foreach(Room room in roomManager.rooms)
+		{
+			if(room.roomCost > money && room.roomState == Room.RoomState.Locked)
+			{
+				room.overlaySpriteRenderer.color = Color.red;
+			}
+			else if(room.roomCost < money && room.roomState == Room.RoomState.Locked)
+			{
+				room.overlaySpriteRenderer.color = Color.white;
+			}
+		}
+
+		foreach (House house in houseManager.houses)
+		{
+			if (house.houseCost > money && house.houseState == House.HouseState.Locked)
+			{
+				house.overlaySpriteRenderer.color = Color.red;
+			}
+			else if (house.houseCost < money && house.houseState == House.HouseState.Locked)
+			{
+				house.overlaySpriteRenderer.color = Color.white;
+			}
+		}
+	}
 }

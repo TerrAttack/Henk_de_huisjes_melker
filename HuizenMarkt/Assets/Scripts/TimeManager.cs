@@ -24,8 +24,8 @@ public class TimeManager : MonoBehaviour
     {
         dayText.text = "Day: " + ((int)day).ToString();
         monthText.text = "Month: " + month.ToString();
-        timer += Time.deltaTime;
-        day += Time.deltaTime;
+        timer += Time.deltaTime * 5;
+        day += Time.deltaTime * 5;
 
         if (timer > 30)
         {
