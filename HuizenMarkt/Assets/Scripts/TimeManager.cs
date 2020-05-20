@@ -8,6 +8,7 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI dayText = null;
     [SerializeField] TextMeshProUGUI monthText = null;
+    [SerializeField] AchievementManager achievementScript = null;
     private float timer = 0;
     public int month = 1;
     public float day = 0;
@@ -32,6 +33,18 @@ public class TimeManager : MonoBehaviour
             month++;
             day = 1;
             timer = 0;
+            if (month == 2)
+            {
+                achievementScript.EarnAchievement("Survive 1 month");
+            }
+            else if (month == 6)
+            {
+                achievementScript.EarnAchievement("Survive 5 months");
+            }
+            else if (month == 11)
+            {
+                achievementScript.EarnAchievement("Survive 10 months");
+            }
         }
     }
 }

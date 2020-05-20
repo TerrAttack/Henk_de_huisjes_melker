@@ -12,6 +12,7 @@ public class EconomyManagerScript : MonoBehaviour
     [SerializeField] GameObject studentList = null;
     [SerializeField] TimeManager timeManager = null;
     public Student[] students;
+    public IList<Student> list2;
     public int totalEarnedMoney;
     public int month = 1;
     public int lastMonth = 1;

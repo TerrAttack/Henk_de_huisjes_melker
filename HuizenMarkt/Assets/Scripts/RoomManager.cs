@@ -7,6 +7,7 @@ public class RoomManager : MonoBehaviour
 
 	[SerializeField] EconomyManagerScript moneyScript = null;
 	[SerializeField] GameObject gameHandler = null;
+	[SerializeField] AchievementManager achievementScript = null;
 	private RoomStatsUI r;
 
 	
@@ -55,6 +56,7 @@ public class RoomManager : MonoBehaviour
 						if (moneyScript.money >= room.roomCost)
 						{
 							moneyScript.money -= room.roomCost;
+							achievementScript.EarnAchievement("Buy a room");
 							SelectRoom(room);
 							roomGotSelected = true;
 						}

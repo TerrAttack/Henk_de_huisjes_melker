@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,16 +27,41 @@ public class Achievement
         this.Points = points;
         this.SpriteIndex = spriteIndex;
         this.AchievementRef = achievementRef;
+
+        LoadAchievement();
     }
     public bool EarnAchievement()
     {
+        //Debug.Log("Achievement: "+ title);
+        Debug.Log("Unlocked: " + unlocked);
+
         if (!unlocked)
         {
-            unlocked = true;
+            SaveAchievement(true);
             achievementRef.GetComponent<Image>().sprite = AchievementManager.Instance.UnlockedSprite;
             AchievementManager.Instance.moneyScript.money += points;
+            AchievementManager.Instance.moneyScript.totalEarnedMoney += points;
+            Debug.Log("Unlocking Succes" );
             return true;
         }
+        Debug.Log("Unlocking Failed");
         return false;
+    }
+
+    public void SaveAchievement(bool val)
+    {
+        unlocked = val;
+        PlayerPrefs.SetInt(title, val ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadAchievement()
+    {
+        unlocked = PlayerPrefs.GetInt(title) == 1 ? true : false;
+
+        if (unlocked)
+        {
+            achievementRef.GetComponent<Image>().sprite = AchievementManager.Instance.UnlockedSprite;
+        }
     }
 }

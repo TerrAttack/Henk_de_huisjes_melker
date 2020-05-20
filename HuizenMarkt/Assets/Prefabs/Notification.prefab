@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 2502563851416451048}
   - component: {fileID: 2502563851416451047}
   - component: {fileID: 2502563851416451046}
+  - component: {fileID: 3948383278624124365}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -399,6 +400,18 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!225 &3948383278624124365
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502563851416451044}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2502563851747636929
 GameObject:
   m_ObjectHideFlags: 0

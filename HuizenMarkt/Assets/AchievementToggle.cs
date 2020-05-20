@@ -6,13 +6,14 @@ public class AchievementToggle : MonoBehaviour
 {
    public void ToggleUI()
     {
-        if(this.transform.gameObject.activeSelf)
-        {
-            this.transform.gameObject.SetActive(false);
-        }
-        else if(!this.transform.gameObject.activeSelf)
-        {
-            this.transform.gameObject.SetActive(true);
-        }
+        //if(this.transform.gameObject.activeSelf)
+        //{
+        //    this.transform.gameObject.SetActive(false);
+        //}
+        //else if(!this.transform.gameObject.activeSelf)
+        //{
+        //    this.transform.gameObject.SetActive(true);
+        //}
+        this.transform.gameObject.SetActive(!this.transform.gameObject.activeSelf);
     }
 }

@@ -7,6 +7,7 @@ public class HouseManager : MonoBehaviour
 	private bool houseGotSelected = false;
 
 	[SerializeField] EconomyManagerScript moneyScript = null;
+	[SerializeField] AchievementManager achievementScript = null;
 
 	private void Start()
 	{
@@ -42,6 +43,7 @@ public class HouseManager : MonoBehaviour
 						if (moneyScript.money >= house.houseCost)
 						{
 							moneyScript.money -= house.houseCost;
+							achievementScript.EarnAchievement("Buy a house");
 							SelectHouse(house);
 							houseGotSelected = true;
 						}
