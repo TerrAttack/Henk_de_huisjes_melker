@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] Object scene = null;
+    [SerializeField] Object scene;
     [SerializeField] float delay = 0;
     [SerializeField] bool OnStart = false;
 
     public void Start()
     {
-        if(OnStart) StartCoroutine(loadSceneDelay());
+        if (OnStart) StartCoroutine(loadSceneDelay());
     }
 
     public void LoadScene()
@@ -21,6 +21,7 @@ public class SceneLoader : MonoBehaviour
     IEnumerator loadSceneDelay()
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(scene.name); 
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
     }
 }

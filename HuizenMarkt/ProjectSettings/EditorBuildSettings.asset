@@ -15,6 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Screen.unity
     guid: 5a9b8630a12737b4586c547bbc1cd852
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Scenes/Main Scene.unity
     guid: e55db9e8e6537f74dabc8da29548227d
+=======
+    path: Assets/Scenes/PlayTestScene.unity
+    guid: ede76cd1d58e54d4ca85057b9f4956c9
+>>>>>>> Stashed changes
   m_configObjects: {}

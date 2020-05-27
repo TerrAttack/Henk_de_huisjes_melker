@@ -28,6 +28,7 @@ public class Student : MonoBehaviour
     public int currentMoney;
     public int income;
     public float happiness = 100;
+    public string studentName = "jeff";
 
     [SerializeField] public Animator animator;
     [SerializeField] public Room appartment;
