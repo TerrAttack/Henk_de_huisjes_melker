@@ -34,14 +34,14 @@ public class AchievementManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        CreateAchievement("General Area", "Earn a total of 10000 points", "Earn 10000 points to achieve this!", 69, 0);
-        CreateAchievement("General Area", "Earn a total of 100000 points", "Earn 100000 points to achieve this!", 420, 0);
-        CreateAchievement("General Area", "Buy a house", "Buy a house to achieve this!", 20, 0);
-        CreateAchievement("General Area", "Buy a room", "Buy a room to achieve this!", 20, 0);
-        CreateAchievement("General Area", "Put a student in a room", "Have a student to achieve this!", 20, 0);
-        CreateAchievement("General Area", "Survive 1 month", "Survive 1 monthto achieve this!", 50, 0);
-        CreateAchievement("General Area", "Survive 5 months", "Survive 5 months to achieve this!", 100, 0);
-        CreateAchievement("General Area", "Survive 10 months", "Survive 10 months to achieve this!", 200, 0);
+        CreateAchievement("General Area", "First step", "Buy a house to achieve this!", 10, 0);
+        CreateAchievement("General Area", "Second step", "Buy a room to achieve this!", 10, 0);
+        CreateAchievement("General Area", "Third step", "Have a student to achieve this!", 20, 0);
+        CreateAchievement("General Area", "Still learning", "Survive 1 month to achieve this!", 50, 0);
+        CreateAchievement("General Area", "Getting better", "Survive 5 months to achieve this!", 100, 0);
+        CreateAchievement("General Area", "YOU'RE STILL PLAYING?!?!?", "Survive 10 months to achieve this!", 200, 0);
+        CreateAchievement("General Area", "Let's get this bread", "Earn 10000 points to achieve this!", 69, 0);
+        CreateAchievement("General Area", "That's a lot of bread", "Earn 100000 points to achieve this!", 420, 0);
 
         AchievementsMenu.SetActive(false);
     }

@@ -16,6 +16,8 @@ public class EconomyManagerScript : MonoBehaviour
     public int totalEarnedMoney;
     public int month = 1;
     public int lastMonth = 1;
+    public int targetProfit = 10;
+    public int currentProfit = 0;
 
 
     void Start()
@@ -43,8 +45,14 @@ public class EconomyManagerScript : MonoBehaviour
         month = timeManager.month;
         if (month > lastMonth)
         {
+            currentProfit = 0;
             getPaid();
             payBills();
+
+            if(currentProfit < targetProfit)
+            {
+                //lose
+            }
         }
     }
 
@@ -63,7 +71,9 @@ public class EconomyManagerScript : MonoBehaviour
         }
         money += income;
         totalEarnedMoney += income;
+        currentProfit += income;
     }
+
     public void payBills()
     {
         int costs = 0;
@@ -76,5 +86,6 @@ public class EconomyManagerScript : MonoBehaviour
             }
         }
         money -= costs;
+        currentProfit -= costs;
     }
 }
