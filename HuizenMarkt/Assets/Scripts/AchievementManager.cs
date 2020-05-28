@@ -57,7 +57,7 @@ public class AchievementManager : MonoBehaviour
         {
             EarnAchievement("That's a lot of bread");
         }
-        if (moneyScript.students.Count() > 0)
+        if (moneyScript.students.Count > 0)
         {
             EarnAchievement("Third step");
         }
@@ -65,7 +65,6 @@ public class AchievementManager : MonoBehaviour
 
     public void EarnAchievement(string title)
     {
-        print("Earning: " + title);
         if (achievements[title].EarnAchievement())
         {
             GameObject notification = (GameObject)Instantiate(Notification);
