@@ -47,11 +47,8 @@ public class EconomyManagerScript : MonoBehaviour
 			getPaid();
 			payBills();
 
-			print("Profit: "+ currentProfit);
-			if (currentProfit < (int)targetProfit)
+			if (currentProfit < (int)targetProfit || money < 0)
 			{
-				//lose
-				print("YOU LOSE");
 				SceneManager.LoadScene(sceneName:"EndScreen");
 			}
 			targetProfit *= 1.25f;
