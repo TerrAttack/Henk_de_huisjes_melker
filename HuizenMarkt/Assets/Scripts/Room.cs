@@ -42,13 +42,13 @@ public class Room : MonoBehaviour
     [SerializeField] public House inHouse;
 
     [Header("Overlay Objects")]
-    [SerializeField] GameObject overlay = null;
+    [SerializeField] public GameObject overlay = null;
 
     [Header("Overlay Sprites")]
     [SerializeField] public Sprite LockedSprite;
     [SerializeField] public Sprite HighLightSprite;
 
-    SpriteRenderer overlaySpriteRenderer;
+    public SpriteRenderer overlaySpriteRenderer;
     SpriteRenderer spriteRenderer;
 
     BoxCollider2D boxCollider2D;
@@ -67,6 +67,11 @@ public class Room : MonoBehaviour
         overlaySpriteRenderer.sprite = LockedSprite;
         SetType(roomType);
         SwitchState(roomState);
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void SetType(RoomType _roomType)

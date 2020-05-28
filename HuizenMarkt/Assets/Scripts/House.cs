@@ -33,7 +33,7 @@ public class House : MonoBehaviour
     [SerializeField] public Sprite LockedSprite;
     [SerializeField] public Sprite HighLightSprite;
 
-    SpriteRenderer overlaySpriteRenderer;
+    public SpriteRenderer overlaySpriteRenderer;
     SpriteRenderer spriteRenderer;
 
     BoxCollider2D boxCollider2D;

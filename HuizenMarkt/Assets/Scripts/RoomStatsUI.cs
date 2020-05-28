@@ -9,6 +9,7 @@ public class RoomStatsUI : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] public RoomManager roomManager = null;
+    [SerializeField] public EconomyManagerScript economyManagerScript = null;
 
     [Header("Room Info")]
     [SerializeField] public GameObject InfoOverlay = null;
@@ -170,7 +171,9 @@ public class RoomStatsUI : MonoBehaviour
             GameObject student = Instantiate(StudentPrefab, Vector3.zero, Quaternion.identity);
             var g = student.GetComponent<Student>();
             g.appartment = roomManager.SelectedRoom;
+            student.transform.position = roomManager.SelectedRoom.transform.position;
             student.transform.parent = StudentList.transform;
+            economyManagerScript.students.Add(student.GetComponent<Student>());
         }    
     }
 

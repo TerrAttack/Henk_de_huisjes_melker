@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -4535666110157140687, guid: 7e9451cfd60177046b5fd1a9c468686c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   studentActivity: 0
   studentState: 1
-  currentMoney: 0
-  income: 0
+  currentMoney: 1000
+  income: 300
   happiness: 100
   animator: {fileID: 3505707228798636634}
   appartment: {fileID: 0}
