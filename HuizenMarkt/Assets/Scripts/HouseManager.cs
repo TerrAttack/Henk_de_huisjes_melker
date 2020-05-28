@@ -43,7 +43,7 @@ public class HouseManager : MonoBehaviour
 						if (moneyScript.money >= house.houseCost)
 						{
 							moneyScript.money -= house.houseCost;
-							achievementScript.EarnAchievement("Buy a house");
+							achievementScript.EarnAchievement("First step");
 							SelectHouse(house);
 							houseGotSelected = true;
 						}

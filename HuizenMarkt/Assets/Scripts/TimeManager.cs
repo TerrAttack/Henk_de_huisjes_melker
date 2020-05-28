@@ -25,8 +25,8 @@ public class TimeManager : MonoBehaviour
     {
         dayText.text = "Day: " + ((int)day).ToString();
         monthText.text = "Month: " + month.ToString();
-        timer += Time.deltaTime * 5;
-        day += Time.deltaTime * 5;
+        timer += Time.deltaTime * 3;
+        day += Time.deltaTime * 3;
 
         if (timer > 30)
         {
@@ -35,15 +35,15 @@ public class TimeManager : MonoBehaviour
             timer = 0;
             if (month == 2)
             {
-                achievementScript.EarnAchievement("Survive 1 month");
+                achievementScript.EarnAchievement("Still learning");
             }
             else if (month == 6)
             {
-                achievementScript.EarnAchievement("Survive 5 months");
+                achievementScript.EarnAchievement("Getting better");
             }
             else if (month == 11)
             {
-                achievementScript.EarnAchievement("Survive 10 months");
+                achievementScript.EarnAchievement("YOU'RE STILL PLAYING?!?!?");
             }
         }
     }

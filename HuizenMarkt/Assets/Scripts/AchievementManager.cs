@@ -34,7 +34,7 @@ public class AchievementManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        CreateAchievement("General Area", "First step", "Buy a house to achieve this!", 10, 0);
+        CreateAchievement("General Area", "First step", "Buy a house to achieve this!", 5, 0);
         CreateAchievement("General Area", "Second step", "Buy a room to achieve this!", 10, 0);
         CreateAchievement("General Area", "Third step", "Have a student to achieve this!", 20, 0);
         CreateAchievement("General Area", "Still learning", "Survive 1 month to achieve this!", 50, 0);
@@ -51,15 +51,15 @@ public class AchievementManager : MonoBehaviour
     {
         if (moneyScript.totalEarnedMoney >= 10000)
         {
-            EarnAchievement("Earn a total of 10000 points");
+            EarnAchievement("Let's get this bread");
         }
         if (moneyScript.totalEarnedMoney >= 100000)
         {
-            EarnAchievement("Earn a total of 100000 points");
+            EarnAchievement("That's a lot of bread");
         }
         if (moneyScript.students.Count() > 0)
         {
-            EarnAchievement("Put a student in a room");
+            EarnAchievement("Third step");
         }
     }
 

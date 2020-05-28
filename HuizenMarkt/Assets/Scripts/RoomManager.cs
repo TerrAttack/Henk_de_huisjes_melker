@@ -56,7 +56,7 @@ public class RoomManager : MonoBehaviour
 						if (moneyScript.money >= room.roomCost)
 						{
 							moneyScript.money -= room.roomCost;
-							achievementScript.EarnAchievement("Buy a room");
+							achievementScript.EarnAchievement("Second step");
 							SelectRoom(room);
 							roomGotSelected = true;
 						}
