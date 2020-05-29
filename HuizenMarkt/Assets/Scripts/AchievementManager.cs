@@ -57,7 +57,7 @@ public class AchievementManager : MonoBehaviour
         {
             EarnAchievement("That's a lot of bread");
         }
-        if (moneyScript.students.Count() > 0)
+        if (moneyScript.students.Count > 0)
         {
             EarnAchievement("Third step");
         }

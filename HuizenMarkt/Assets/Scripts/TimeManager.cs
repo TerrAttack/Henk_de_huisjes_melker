@@ -9,6 +9,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dayText = null;
     [SerializeField] TextMeshProUGUI monthText = null;
     [SerializeField] AchievementManager achievementScript = null;
+    [SerializeField] public int timeScale = 3;
     private float timer = 0;
     public int month = 1;
     public float day = 0;
@@ -25,8 +26,8 @@ public class TimeManager : MonoBehaviour
     {
         dayText.text = "Day: " + ((int)day).ToString();
         monthText.text = "Month: " + month.ToString();
-        timer += Time.deltaTime * 3;
-        day += Time.deltaTime * 3;
+        timer += Time.deltaTime * timeScale;
+        day += Time.deltaTime * timeScale;
 
         if (timer > 30)
         {
