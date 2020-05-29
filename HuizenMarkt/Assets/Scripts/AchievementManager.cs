@@ -57,7 +57,7 @@ public class AchievementManager : MonoBehaviour
         {
             EarnAchievement("That's a lot of bread");
         }
-        if (moneyScript.students.Count > 0)
+        if (moneyScript.studentList.transform.childCount > 0)
         {
             EarnAchievement("Third step");
         }
@@ -72,12 +72,6 @@ public class AchievementManager : MonoBehaviour
             StartCoroutine(FadeAchievement(notification));
         }
     }
-
-    //IEnumerator DestroyNotification(GameObject notification)
-    //{
-    //    yield return new WaitForSeconds(3);
-    //    Destroy(notification);
-    //}
 
     IEnumerator FadeAchievement(GameObject obj)
     {

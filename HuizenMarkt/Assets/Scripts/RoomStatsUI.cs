@@ -187,7 +187,6 @@ public class RoomStatsUI : MonoBehaviour
             var g = student.GetComponent<Student>();
             g.appartment = roomManager.SelectedRoom;
             student.transform.position = roomManager.SelectedRoom.transform.position;
-            economyManagerScript.students.Add(student.GetComponent<Student>());
             studentCardHandler.AddNewStudentCard(g);
         }    
     }

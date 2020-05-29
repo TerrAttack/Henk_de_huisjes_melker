@@ -27,7 +27,7 @@ public class Student : MonoBehaviour
     public int currentMoney;
     public int income;
     public float happiness = 100;
-    public string studentName = "jeff";
+    public string studentName;
 
     [SerializeField] public Animator animator;
     [SerializeField] public Room appartment;
@@ -41,6 +41,7 @@ public class Student : MonoBehaviour
     #region Methodes
     private void Start()
     {
+        chooseName();
         StudentSpeed = 1f;
         foreach (Transform child in appartment.transform)
             if (child.name == "Waypoints")
@@ -49,13 +50,31 @@ public class Student : MonoBehaviour
 
     private void Update()
     {
-        if(studentState == StudentState.DoingActivity)
+        
+        if (studentState == StudentState.DoingActivity)
             studentActivityTimer += Time.deltaTime;
         SwitchStudentActivity();
         Movement();
         ItSmellsLikeBrokeInHere();
 
 
+    }
+
+    private void chooseName()
+    {
+        int i = UnityEngine.Random.Range(0,2);
+        switch(i)
+        {
+            case 0:
+                studentName = "Reggie";
+                break;
+            case 1:
+                studentName = "Lincy";
+                break;
+            default:
+                studentName = "Jeff";
+                break;
+        }
     }
 
     public void ItSmellsLikeBrokeInHere()

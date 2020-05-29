@@ -13,9 +13,8 @@ public class EconomyManagerScript : MonoBehaviour
 	[SerializeField] TextMeshProUGUI expectedProfitText = null;
 	[SerializeField] RoomManager roomManager = null;
 	[SerializeField] HouseManager houseManager = null;
-	[SerializeField] GameObject studentList = null;
+	[SerializeField] public GameObject studentList = null;
 	[SerializeField] TimeManager timeManager = null;
-	public List<Student> students;
 	public int totalEarnedMoney;
 	public int month = 1;
 	public int lastMonth = 1;
@@ -28,8 +27,6 @@ public class EconomyManagerScript : MonoBehaviour
 		moneyText.text = money.ToString();
 		profitText.text = "Target profit: " + ((int)targetProfit).ToString();
 		totalEarnedMoney = money;
-
-		students = new List<Student>();
 	}
 
 	private void Update()
@@ -57,42 +54,45 @@ public class EconomyManagerScript : MonoBehaviour
 
 	public void payCelery()
 	{
-		foreach (Student student in students)
+		foreach (Transform t in studentList.transform)
 		{
-			student.PayRent();
+			t.GetComponent<Student>().PayRent();
 		}
 	}
 
 	public int CalculateExpectedProfit()
 	{
-		int expectedProfit = 0;
-		foreach (Student student in students)
+		int _expectedProfit = 0;
+		
+		foreach (Transform t in studentList.transform)
 		{
-			expectedProfit += student.appartment.rent;
+			_expectedProfit += t.GetComponent<Student>().appartment.rent;
 		}
 		foreach (Room room in roomManager.rooms)
 		{
 
 			if (room.roomState != Room.RoomState.Locked)
 			{
-				expectedProfit -= room.maintenanceCost;
+				_expectedProfit -= room.maintenanceCost;
 			}
 		}
-		return expectedProfit;
+		
+		return _expectedProfit;
 	}
 
 	public void getPaid()
     {
-		foreach (Student student in students)
+		foreach (Transform t in studentList.transform)
 		{
-			student.currentMoney += student.income;
+			t.GetComponent<Student>().currentMoney += t.GetComponent<Student>().income;
 		}
 		int income = 0;
-        foreach (Student student in students)
+        foreach (Transform t in studentList.transform)
         {
-			if (student.currentMoney - student.appartment.rent >= 0)
+			var g = t.GetComponent<Student>();
+			if (g.currentMoney - g.appartment.rent >= 0)
             {
-                income += student.appartment.rent;
+                income += g.appartment.rent;
             }
         }
         money += income;
