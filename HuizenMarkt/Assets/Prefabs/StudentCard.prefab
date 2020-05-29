@@ -127,6 +127,7 @@ MonoBehaviour:
   studentNameUI: {fileID: 1599179038923282866}
   moneyUI: {fileID: 2741164104915092336}
   incomeUI: {fileID: 1826756509996932584}
+  handler: {fileID: 0}
 --- !u!1 &2371683653783960701
 GameObject:
   m_ObjectHideFlags: 0

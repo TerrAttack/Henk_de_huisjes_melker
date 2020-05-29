@@ -5,21 +5,28 @@ using TMPro;
 
 public class DisplayStudentUICard : MonoBehaviour
 {
-    public StudentUICard studentUICard;
+    public Student student;
 
     public TextMeshProUGUI studentNameUI;
     public TextMeshProUGUI moneyUI;
     public TextMeshProUGUI incomeUI;
+
+    public StudentCardHandler handler;
 
     void Start()
     {
         UpdateContent();
     }
 
-    void UpdateContent()
+    private void Update()
     {
-        studentNameUI.text = studentUICard.studentName;
-        moneyUI.text = studentUICard.money.ToString() + "$";
-        incomeUI.text = studentUICard.income.ToString() + "$ p/m";
+        UpdateContent();
+    }
+
+    public void UpdateContent()
+    {
+        studentNameUI.text = student.studentName;
+        moneyUI.text = student.currentMoney.ToString() + "$";
+        incomeUI.text = student.income.ToString() + "$ p/m";
     }
 }

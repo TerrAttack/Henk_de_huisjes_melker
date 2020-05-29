@@ -6,21 +6,10 @@ public class StudentCardHandler : MonoBehaviour
 {
     [SerializeField] GameObject studentCardPrefab;
 
-    private void Start()
-    {
-
-    }
-
     public void AddNewStudentCard(Student _student)
     {
-        StudentUICard studentUICard = new StudentUICard()
-        {
-            studentName = _student.studentName,
-            money = _student.currentMoney,
-            income = _student.income,
-        };
         GameObject studentCard = Instantiate(studentCardPrefab, this.transform);
-        studentCard.GetComponent<DisplayStudentUICard>().studentUICard = studentUICard;
+        studentCard.GetComponent<DisplayStudentUICard>().student = _student;
     }
 
     public void Update()
