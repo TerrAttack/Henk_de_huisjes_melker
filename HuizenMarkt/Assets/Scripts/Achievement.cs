@@ -32,8 +32,6 @@ public class Achievement
     }
     public bool EarnAchievement()
     {
-        //Debug.Log("Achievement: "+ title);
-        Debug.Log("Unlocked: " + unlocked);
 
         if (!unlocked)
         {
@@ -41,10 +39,8 @@ public class Achievement
             achievementRef.GetComponent<Image>().sprite = AchievementManager.Instance.UnlockedSprite;
             AchievementManager.Instance.moneyScript.money += points;
             AchievementManager.Instance.moneyScript.totalEarnedMoney += points;
-            Debug.Log("Unlocking Succes" );
             return true;
         }
-        Debug.Log("Unlocking Failed");
         return false;
     }
 

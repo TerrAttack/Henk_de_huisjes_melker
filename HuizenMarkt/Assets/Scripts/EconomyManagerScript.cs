@@ -52,18 +52,22 @@ public class EconomyManagerScript : MonoBehaviour
 	{
 		foreach (Student student in students)
 		{
-			student.currentMoney += student.income;
+			student.PayRent();
 		}
 	}
 
 	public void getPaid()
     {
-        int income = 0;
+		foreach (Student student in students)
+		{
+			student.currentMoney += student.income;
+		}
+		int income = 0;
         foreach (Student student in students)
         {
             if (student.appartment.roomState != Room.RoomState.Locked)
             {
-                if (student.PayRent())
+                if (student.currentMoney - student.appartment.rent >= 0)
                 {
                     income += student.appartment.rent;
                 }

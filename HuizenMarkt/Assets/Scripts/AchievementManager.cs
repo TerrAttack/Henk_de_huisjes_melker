@@ -65,7 +65,6 @@ public class AchievementManager : MonoBehaviour
 
     public void EarnAchievement(string title)
     {
-        print("Earning: " + title);
         if (achievements[title].EarnAchievement())
         {
             GameObject notification = (GameObject)Instantiate(Notification);

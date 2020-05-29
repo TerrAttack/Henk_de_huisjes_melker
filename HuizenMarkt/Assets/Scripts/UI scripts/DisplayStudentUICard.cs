@@ -11,7 +11,6 @@ public class DisplayStudentUICard : MonoBehaviour
     public TextMeshProUGUI moneyUI;
     public TextMeshProUGUI incomeUI;
 
-    public StudentCardHandler handler;
 
     void Start()
     {
@@ -29,4 +28,9 @@ public class DisplayStudentUICard : MonoBehaviour
         moneyUI.text = student.currentMoney.ToString() + "$";
         incomeUI.text = student.income.ToString() + "$ p/m";
     }
+
+    public void evict()
+    {
+        transform.parent.GetComponent<StudentCardHandler>().evictStudent(this);
+    }    
 }

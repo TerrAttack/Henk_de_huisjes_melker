@@ -24,6 +24,7 @@ public class RoomStatsUI : MonoBehaviour
     [Header("Student Info")]
     [SerializeField] public GameObject StudentWindow = null;
     [SerializeField] public GameObject StudentWindowBackground = null;
+    [SerializeField] public StudentCardHandler studentCardHandler = null;
     [SerializeField] public GameObject StudentList = null;
     [SerializeField] public GameObject StudentPrefab = null;
 
@@ -138,11 +139,25 @@ public class RoomStatsUI : MonoBehaviour
         StudentWindow.SetActive(!StudentWindow.activeSelf);
         InfoOverlay.SetActive(false);
         UpgradeWindow.SetActive(false);
-        GetRoomInfo();
+        studentCardHandler.clearContent();
+        if(StudentWindow.activeSelf)
+        {
+            for (int i = 0; i < StudentList.transform.childCount; i++)
+            {
+                var s = StudentList.transform.GetChild(i).gameObject;
+                var studentScript = s.GetComponent<Student>();
+                if (studentScript.appartment == roomManager.SelectedRoom)
+                {
+                    studentCardHandler.AddNewStudentCard(studentScript);
+                }
+            }
+        }
+        
     }
     public void DeactivateStudentWindow()
     {
         StudentWindow.SetActive(false);
+        studentCardHandler.clearContent();
     }
     public bool CheckForClickStudent()
     {
@@ -168,12 +183,12 @@ public class RoomStatsUI : MonoBehaviour
         }
         if(a < 2)
         {
-            GameObject student = Instantiate(StudentPrefab, Vector3.zero, Quaternion.identity);
+            GameObject student = Instantiate(StudentPrefab, StudentList.transform);
             var g = student.GetComponent<Student>();
             g.appartment = roomManager.SelectedRoom;
             student.transform.position = roomManager.SelectedRoom.transform.position;
-            student.transform.parent = StudentList.transform;
             economyManagerScript.students.Add(student.GetComponent<Student>());
+            studentCardHandler.AddNewStudentCard(g);
         }    
     }
 
@@ -187,8 +202,7 @@ public class RoomStatsUI : MonoBehaviour
             {
                 Destroy(s);
                 return;
-            }
-                
+            }    
         }
     }
 

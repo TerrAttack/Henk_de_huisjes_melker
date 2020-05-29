@@ -174,17 +174,19 @@ public class Student : MonoBehaviour
         return _waypoint - new Vector2(this.transform.position.x, this.transform.position.y);
     }
 
-    public bool PayRent()
+    public void PayRent()
     {
         if (currentMoney - appartment.rent >= 0)
         {
             currentMoney -= appartment.rent;
-            return true;
+        }
+        else if(currentMoney > 0 && currentMoney - appartment.rent <= 0)
+        {
+            currentMoney = 0;
         }
         else 
         {
             FileForBankruptcy();
-            return false;
         }   
     }
 
