@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dayText = null;
     [SerializeField] TextMeshProUGUI monthText = null;
     [SerializeField] AchievementManager achievementScript = null;
-    [SerializeField] public int timeScale = 3;
+    [SerializeField] public int timeScale;
     private float timer = 0;
     public int month = 1;
     public float day = 0;

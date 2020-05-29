@@ -18,6 +18,11 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(loadSceneDelay());
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     IEnumerator loadSceneDelay()
     {
         yield return new WaitForSeconds(delay);

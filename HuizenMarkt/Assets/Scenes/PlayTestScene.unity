@@ -5026,7 +5026,7 @@ MonoBehaviour:
   dayText: {fileID: 1243391456}
   monthText: {fileID: 1183279136}
   achievementScript: {fileID: 741536393}
-  timeScale: 3
+  timeScale: 1
   month: 1
   day: 1
 --- !u!1 &1544127158

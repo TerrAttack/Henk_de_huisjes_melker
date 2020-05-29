@@ -90,12 +90,9 @@ public class EconomyManagerScript : MonoBehaviour
 		int income = 0;
         foreach (Student student in students)
         {
-            if (student.PayRent())
+			if (student.currentMoney - student.appartment.rent >= 0)
             {
-				if (student.currentMoney - student.appartment.rent >= 0)
-                {
-                    income += student.appartment.rent;
-                }
+                income += student.appartment.rent;
             }
         }
         money += income;
