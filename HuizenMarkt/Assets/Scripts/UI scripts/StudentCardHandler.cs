@@ -26,12 +26,4 @@ public class StudentCardHandler : MonoBehaviour
         Destroy(card.student.gameObject);
     }
 
-    public void Update()
-    {
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            GameObject t = transform.GetChild(i).gameObject;
-            t.transform.position = new Vector3(0,this.transform.position.y - i, 0);
-        }
-    }
 }
